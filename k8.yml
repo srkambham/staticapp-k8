@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staticapp-deployment
+  namespace: staticapp-k8
+spec:
+  selector:
+    matchLabels:
+      app: staticapp-deployment
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: staticapp-deployment
+    spec:
+      containers:
+      - name: staticapp-deployment
+        image: 861531569385.dkr.ecr.us-east-2.amazonaws.com/staticapp-k8:5
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: staticapp-svc
+  namespace: staticapp-k8
+spec:
+  selector:
+    app: staticapp-deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: staticapp-ingress
+ namespace: staticapp-k8
+spec:
+ rules:
+ - host: static.maheswargoud.xyz
+   http:
+     paths:
+     - path:
+       backend:
+         serviceName: staticapp-svc
+         servicePort: 80
