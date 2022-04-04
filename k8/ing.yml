@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: staticapp-ingress
+ namespace: staticapp-k8
+spec:
+ rules:
+ - host: static.maheswargoud.xyz
+   http:
+     paths:
+     - path:
+       backend:
+         serviceName: staticapp-svc
+         servicePort: 80
