@@ -41,4 +41,4 @@ jobs:
           sudo python3.7 -m pip install -U checkov 
           cd ../
           ls -ltr 
-          checkov --directory ./
+          checkov --directory ./staticapp-k8
