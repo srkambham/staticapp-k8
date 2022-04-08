@@ -30,7 +30,5 @@ jobs:
         run: |
           wget "https://github.com/techjacker/repo-security-scanner/releases/download/0.4.0/scanrepo-0.4.0-linux-386.tar.gz"
           tar -xvzf scanrepo-0.4.0-linux-386.tar.gz
+          cp scanrepo /usr/local/bin/
           git log -p | scanrepo
-
-          echo "hello"
-          echo "hello"
